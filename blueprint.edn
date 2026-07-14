@@ -1,0 +1,11 @@
+[{:itonami.blueprint/social-impact [:field-safety :structural-quality :site-documentation]
+  :itonami.blueprint/domain :engineering/civil
+  :itonami.blueprint/required-technologies [:robotics :identity :survey-forms :dmn :audit-ledger]
+  :itonami.blueprint/isco-08 "3112"
+  :itonami.blueprint/name "Civil Engineering Technicians"
+  :itonami.blueprint/governor :civeng-governor
+  :itonami.blueprint/robotics true
+  :db/id -1
+  :itonami.blueprint/status :public-oss
+  :itonami.blueprint/id "cloud-itonami-isco-3112"
+  :itonami.blueprint/license "AGPL-3.0-or-later"}]
