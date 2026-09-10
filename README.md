@@ -63,14 +63,14 @@ human-in-the-loop interrupt/resume via checkpointing.
                                            +-> :hold               (:hard? true)
 ```
 
-- `src/civeng/store.cljc` — `Store` protocol + `MemStore`:
+- `src/civeng/store.kotoba` — `Store` protocol + `MemStore`:
   registered projects/sites, committed records, an append-only audit ledger.
-- `src/civeng/advisor.cljc` — `Advisor` protocol; `mock-advisor`
+- `src/civeng/advisor.kotoba` — `Advisor` protocol; `mock-advisor`
   (deterministic, default) proposes a survey operation from a request; `llm-advisor`
   wraps a `langchain.model/ChatModel` — either way the advisor only ever
   produces a `:propose`-effect proposal, never a committed record, and LLM parse
   failures always yield `confidence 0.0` (forces escalation, never fabricated confidence).
-- `src/civeng/governor.cljc` — `CivEngGovernor/check`: a pure function,
+- `src/civeng/governor.kotoba` — `CivEngGovernor/check`: a pure function,
   wired as its own `:govern` node. Hard invariants (unregistered project,
   a proposal whose `:effect` isn't `:propose`) always route to `:hold`.
   Escalation invariants (`:flag-structural-concern` or low advisor confidence)
@@ -78,7 +78,7 @@ human-in-the-loop interrupt/resume via checkpointing.
   graph checkpoints and only resumes on explicit human approval (`actor/approve!`),
   matching the README's robotics-premise statement that structural concerns
   always require human sign-off.
-- `src/civeng/actor.cljc` — `build-graph`, `run-request!`, `approve!`:
+- `src/civeng/actor.kotoba` — `build-graph`, `run-request!`, `approve!`:
   the `langgraph.graph/state-graph` wiring itself.
 
 ```bash
