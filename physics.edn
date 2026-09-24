@@ -1,0 +1,32 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a field-survey robot performs survey data
+;; recording, inspection logging and site documentation for civil engineering
+;; technicians (ISCO 3112). Its physical work is driving a total station across
+;; a rough site, and running tensile checks on reinforcing-bar samples taken
+;; from site deliveries.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-3112"
+ :cases
+ [{:id :survey-rover-site-stop
+   :kind :transport
+   :procedure "survey rover carries a total station on a mast across the site and brakes at the next setup point"
+   :params {:mass-kg 70.0 :payload-kg 8.0 :distance-m 50.0 :v-max-mps 1.0 :a-max-mps2 0.5
+            :brake-decel-mps2 1.5 :drive-force-n 300.0 :crr 0.06
+            :support-half-length-m 0.30}
+   :sweep {:param :cog-height-m :values [0.4 0.6 0.8 1.0 1.2]}
+   :quantity :min-tipover-margin
+   :limit {:min 0.4 :basis "estimate: keep 40 % of the static tip-over reserve on uneven ground, where the flat-floor model is optimistic"}
+   :boundary {:lo 0.2 :hi 2.0}}
+  {:id :rebar-d16-tensile-check
+   :kind :material
+   :procedure "tensile check of a D16 SD345 reinforcing-bar sample (nominal area 198.6 mm2, yield 345 MPa) at increasing load"
+   :params {:area-m2 1.986e-4 :yield-stress-pa 345.0e6 :youngs-modulus-pa 200.0e9}
+   :sweep {:param :max-force-n :values [40000.0 55000.0 65000.0 75000.0 90000.0]}
+   :quantity :final-strain
+   :limit {:max 0.002 :basis "estimate: 0.2 % strain (the Rp0.2 offset convention) as the line a site proof load must stay under; SD345 area and yield taken from the JIS G 3112 designation"}
+   :boundary {:lo 20000.0 :hi 120000.0}}]}
