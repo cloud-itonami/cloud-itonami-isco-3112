@@ -1,7 +1,7 @@
 (ns civeng.actor
   "CivEngActor — the ISCO-08 3112 civil engineering technician field
   survey actor as a `langgraph.graph/state-graph` (per ADR-2607011000 /
-  CLAUDE.md Actors section). One graph run = one survey operation request
+  AGENTS.md Actors section). One graph run = one survey operation request
   (intake → advise → govern → decide → commit/hold, with a human-approval
   interrupt for escalated proposals). No infinite internal loop;
   checkpointed per superstep so an interrupted run can resume after human
