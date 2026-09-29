@@ -49,7 +49,7 @@ See [`docs/business-model.md`](docs/business-model.md) and
 
 ## Reference implementation (`:maturity :implemented`)
 
-Full itonami Actor pattern (per ADR-2607011000 / CLAUDE.md's Actors
+Full itonami Actor pattern (per ADR-2607011000 / AGENTS.md's Actors
 section, alongside `cloud-itonami-isco-2411`, `-2161`, `-6130`, `-8160`,
 `-2166`, `-2641`, `-2651`, `-2652`, `-2654`, `-1219`, `-1223`, `-1330`,
 `-1341`, `-1349`, `-1412`, `-1439`, `-2144` and `-2320`): a real
